@@ -2,7 +2,7 @@
 
 A repository of projects I developed while learning Java, applying design patterns and software architecture principles.
 
-## Objetive
+## Objective
 
 To document my progress in software design and development.
 
