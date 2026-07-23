@@ -14,3 +14,10 @@ Practise object-oriented design by applying the SOLID principles to realistic bu
 
 1. **Initial Requirements:** Implement the first functional version of the system.
 2. **System Evolution:** Introduce new requirements to simulate real-world changes in a software project.
+
+## Author
+
+Developed by **Wilson Camilo Ortiz Miño**
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white)](https://github.com/wcortiz)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wilson-camilo-ortiz-mi%C3%B1o-b88282419/)
