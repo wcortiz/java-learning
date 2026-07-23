@@ -24,49 +24,41 @@ A clean-architecture payment processing system built in Java.
 
 ## Exercise brief
 
-<div style="
-    border: 1px solid color-mix(in srgb, currentColor 25%, transparent);
-    background-color: color-mix(in srgb, currentColor 2%, transparent);
-    padding: 0px 15px; 
-    border-radius: 6px;
-    margin: 20px 0;
-">
-
-### Context
-
-An e-commerce platform requires a system to process payments.
-At present, it only accepts card payments, but the business intends to introduce additional payment methods in the future.
-
-
-### Initial Requirements
-
-- A customer must be able to make a payment.
-- Each payment must include:
-    - Identifier
-    - Amount
-    - Date
-    - Status
-- The system must support card payments.
-
-
-### New Requirements
-
-The business has requested the following enhancements:
-
-- Add support for payments made via:
-    - PayPal
-    - Bank transfer
-    - Cryptocurrency
-- Record additional information depending on the payment method used.
-- Allow payments to be cancelled.
-- Introduce an audit system to log payment operations.
-
-
-### Objective
-
-Design a system in which adding new payment methods does not require modifications to the core application.
-
-</div>
+> <hr>
+>  
+> ### Context
+> 
+> An e-commerce platform requires a system to process payments.
+> At present, it only accepts card payments, but the business intends to introduce additional payment methods in the future.
+> 
+> ### Initial Requirements
+> 
+> - A customer must be able to make a payment.
+> - Each payment must include:
+>     - Identifier
+>     - Amount
+>     - Date
+>     - Status
+> - The system must support card payments.
+> 
+> 
+> ### New Requirements
+> 
+> The business has requested the following enhancements:
+> 
+> - Add support for payments made via:
+>     - PayPal
+>     - Bank transfer
+>     - Cryptocurrency
+> - Record additional information depending on the payment method used.
+> - Allow payments to be cancelled.
+> - Introduce an audit system to log payment operations.
+> 
+> 
+> ### Objective
+> 
+> Design a system in which adding new payment methods does not require modifications to the core application.  
+> <hr>
 
 ## Technologies
 
