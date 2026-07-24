@@ -1,0 +1,15 @@
+@startuml use-case-diagram
+
+left to right direction
+
+title Use Case Diagram — Payment System
+
+actor User
+
+rectangle "Payment System" {
+    usecase "Select outstanding payments" as UC1
+}
+
+User -- UC1
+
+@enduml
