@@ -1,0 +1,63 @@
+@startuml activity-diagram
+
+/'---------------------- Styles -------------------'/
+
+skinparam SwimlaneTitleFontStyle bold
+skinparam ActivityBackgroundColor #FFFFC0
+skinparam ActivityBorderColor #FF0000
+skinparam ArrowThickness 1.2
+skinparam ActivityBorderThickness 1.3
+
+/'------------ For Positioning Elements -----------'/
+
+skinparam activity {
+  BorderColor<<invisible>> white
+  BackgroundColor<<invisible>> white
+}
+
+/'-------------------- DIAGRAM --------------------'/
+
+title "Activity Diagram — Payment System"
+
+|System|
+
+|User| 
+start
+
+repeat
+    : select "outstanding payments";
+
+    |System| 
+    : show all outstanding payments to be made;
+
+    if (there are outstanding payments?) then (no)
+        : indicate that there are no payments to be made;
+    else (yes)
+        |User|
+        : select the payment to be make;
+
+        |System|
+        : show information about the payment;
+
+        |User|
+        : select "make payment";
+
+        |System|
+        : request the payment method to use;
+
+        |User|
+        : select the payment method;
+
+        |System|
+        : indicate that the payment was successful;
+
+        stop
+
+        /'Positioning elements'/
+        :; <<invisible>> 
+        detach
+    endif
+
+    |User|
+repeat while ();
+@enduml
