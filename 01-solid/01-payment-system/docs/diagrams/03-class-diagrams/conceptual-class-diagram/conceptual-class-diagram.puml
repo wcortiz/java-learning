@@ -1,0 +1,64 @@
+@startuml conceptual-class-diagram
+
+'------- HIDE ELEMENTOS AND SKINPARAM ---------'
+
+skinparam classAttributeIconSize 0
+skinparam classBorderThickness 1.3
+
+hide methods
+hide circle
+
+'------------- COLOR DEFINITION ---------------'
+
+skinparam class {
+    BackgroundColor #FFFFFF
+    BorderColor     #333333
+}
+
+'------------ ELEMENTS DEFINITION ---------------'
+
+class Client {
+    name
+    email
+}
+
+class Payment {
+    amount
+    date
+    status
+}
+
+class PaymentMethod {
+    name
+}
+
+class CreditCard {
+    cardNumber
+    titular
+}
+
+class PayPal {
+    email
+}
+
+class BankTransfer {
+    IBAN
+    titular
+}
+
+class Cryptocurrency {
+    walletDirection
+    currency
+}
+
+'-------------- RELATIONSHIPS -----------------'
+
+Client "1" *--> "0..*" Payment : makes
+Payment "0..*" o--> "1" PaymentMethod : is processed using
+
+PaymentMethod <|-- CreditCard
+PaymentMethod <|-- PayPal
+PaymentMethod <|-- BankTransfer
+PaymentMethod <|-- Cryptocurrency
+
+@enduml
