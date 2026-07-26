@@ -17,11 +17,6 @@ skinparam class {
 
 '------------ ELEMENTS DEFINITION ---------------'
 
-class Client {
-    name
-    email
-}
-
 class Payment {
     amount
     date
@@ -53,7 +48,6 @@ class Cryptocurrency {
 
 '-------------- RELATIONSHIPS -----------------'
 
-Client "1" *--> "0..*" Payment : makes
 Payment "0..*" o--> "1" PaymentMethod : is processed using
 
 PaymentMethod <|-- CreditCard
