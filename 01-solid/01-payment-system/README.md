@@ -14,6 +14,7 @@ A clean-architecture payment processing system built in Java.
 - [Features](#features)
 - [Exercise Brief](#exercise-brief)
 - [Technologies](#technologies)
+- [Project Structure](#project-structure)
 - [Diagrams](#diagrams)
     - [Use Case Diagram](#use-case-diagram)
     - [Activity Diagram](#activity-diagram)
@@ -65,6 +66,42 @@ A clean-architecture payment processing system built in Java.
 - Without frameworks (pure Java)
 
 Built using pure Java without external dependencies.
+
+## Project Structure
+
+- `application/` — application entry point and initialization components
+- `model/` — domain entities and business concepts
+- `service/` — application logic and payment processing services
+- `infrastructure/` — external integrations and technical implementations
+- `view/` — user interface components for input and output handling
+- `controller/` — coordinates user interactions and application flow
+
+```
+src/
+└── dev/wcortiz/paymentsystem/
+    ├── application/
+    |   ├── Main.java
+    │   └── PaymentSeeder.java
+    ├── controller/
+    │   └── PaymentController.java
+    ├── infrastructure/
+    │   ├── CreditCardGateway.java
+    │   └── FakeCardGateway.java
+    ├── model/
+    │   └── Payment.java
+    ├── service/
+    │   ├── CreditCardMethod.java
+    │   ├── PaymentMethod.java
+    │   ├── PaymentRequestDto.java
+    |   ├── PaymentResponseDto.java
+    |   ├── PaymentService.java
+    |   └── PaymentServiceImpl.java
+    └── view/
+        ├── InputView.java
+        ├── InputConsola.java
+        ├── OutputView.java
+        └── OutputConsola.java
+```
 
 ## Diagrams
 
