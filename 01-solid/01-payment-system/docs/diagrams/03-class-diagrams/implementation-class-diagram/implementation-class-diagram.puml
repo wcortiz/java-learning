@@ -1,0 +1,156 @@
+@startuml implementation-class-diagram
+
+hide stereotype
+
+'---------------- COLOURS DEFINITION ------------------'
+
+skinparam class {
+    BackgroundColor<<controller>> #DAE8FC
+    BorderColor<<controller>>     #6381AF
+
+    BackgroundColor<<view>> #D5E8D4
+    BorderColor<<view>>     #7DAC62
+
+    BackgroundColor<<model>> #FFE5E4
+    BorderColor<<model>>     #B85450
+
+    BackgroundColor<<service>> #fff3cd
+    BorderColor<<service>>     #c49a00
+
+    BackgroundColor<<dal>> #FFE6CC
+    BorderColor<<dal>>     #D79B00
+
+    BackgroundColor<<infrastructure>> #E1D5E7
+    BorderColor<<infrastructure>>     #6f517c
+}
+
+
+'---------------- ELEMENTS DEFINITION ------------------'
+
+'VIEW layer'
+
+package "view" {
+    interface InputView <<view>>
+
+
+    interface OutputView <<view>>
+
+    class InputConsola <<view>> {
+        - entrada: Scanner
+    }
+
+    class OutputConsola <<view>>
+
+    /'Positioning elements'/
+    class Auxiliar 
+    hide Auxiliar
+}
+
+'MODEL layer'
+
+package "model" {
+    class Payment <<model>> {
+        - identifier
+        - amount
+        - date
+        - status
+    }
+}
+
+'SERVICE layer'
+
+package "service" {
+    interface PaymentService <<service>>
+    class PaymentServiceImpl <<service>>
+
+    interface PaymentMethod <<service>> {
+        getName(): String
+    }
+
+    class CreditCardMethod <<service>>
+
+    class PaymentResponseDto <<service>>
+    class PaymentRequestDto <<service>>
+}
+
+'CONTROLLER layer'
+
+package "controller" {
+    class PaymentController <<controller>> {
+        + iniciar(): void
+    }
+}
+
+'GATEWAY layer'
+
+package "infrastructure" {
+    interface CreditCardGateway <<infrastructure>>
+    class FakeCardGateway <<infrastructure>>
+}
+
+'Others'
+
+class AutoCloseable {
+    + close(): void
+}
+
+class Auxiliar2
+hide Auxiliar2
+
+'-------------- FOR POSITIONING ELEMENTS ---------------'
+
+InputView -down- Auxiliar
+Auxiliar -down- OutputView
+
+PaymentController -left- Auxiliar
+
+Auxiliar2 -down- PaymentRequestDto
+Auxiliar2 -down- PaymentRequestDto
+
+PaymentController -up- Auxiliar2
+
+Auxiliar2 -right- Payment
+
+'------------------- RELATIONSHIPS --------------------'
+
+'View'
+
+InputConsola .up.|> AutoCloseable
+
+InputView <|.left. InputConsola
+OutputView <|.left. OutputConsola
+
+'View and Controller'
+
+PaymentController "1" -left-> "1" InputView : "reads"
+PaymentController "1" -down-> "1" OutputView : "writes"
+
+'Service'
+
+PaymentRequestDto <.down. PaymentService : "receives"
+PaymentService .down.> PaymentResponseDto : "returns"
+
+PaymentService <|.right. PaymentServiceImpl
+PaymentServiceImpl .right.> PaymentMethod : "uses"
+
+PaymentMethod <|.right. CreditCardMethod
+
+'Service and Controller'
+
+PaymentController .up.> PaymentRequestDto : "creates"
+PaymentController "1" -right-> "1" PaymentService : "uses"
+PaymentController .right.> PaymentResponseDto : "uses"
+
+'Service and Model'
+
+PaymentServiceImpl .up.> Payment : "manages"
+
+'Infrastructure'
+
+CreditCardGateway <|.up. FakeCardGateway
+
+'Service and Infrastructure'
+
+CreditCardMethod .right.> CreditCardGateway : "communicates with"
+
+@enduml
