@@ -27,24 +27,13 @@ class PaymentMethod {
     name
 }
 
-class CreditCard {
-    cardNumber
-    titular
-}
+class CreditCard
 
-class PayPal {
-    email
-}
+class PayPal
 
-class BankTransfer {
-    IBAN
-    titular
-}
+class BankTransfer
 
-class Cryptocurrency {
-    walletDirection
-    currency
-}
+class Cryptocurrency
 
 '-------------- RELATIONSHIPS -----------------'
 
