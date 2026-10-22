@@ -1,5 +1,4 @@
-@startuml implementation-class-diagram
-
+@startuml
 hide stereotype
 
 '---------------- COLOURS DEFINITION ------------------'
@@ -17,8 +16,8 @@ skinparam class {
     BackgroundColor<<service>> #fff3cd
     BorderColor<<service>>     #c49a00
 
-    BackgroundColor<<dal>> #FFE6CC
-    BorderColor<<dal>>     #D79B00
+    BackgroundColor<<repository>> #FFE6CC
+    BorderColor<<repository>>     #D79B00
 
     BackgroundColor<<infrastructure>> #E1D5E7
     BorderColor<<infrastructure>>     #6f517c
@@ -50,11 +49,28 @@ package "view" {
 
 package "model" {
     class Payment <<model>> {
-        - identifier
-        - amount
-        - date
-        - status
+        - identifier: UUID
+        - amount: BigDecimal
+        - date: LocalDate
+        - status: PaymentStatus
+        
+        + complete(): void
+        + isPending(): boolean
+        + isCompleted(): boolean
     }
+
+    enum PaymentStatus <<model>> {
+        PENDING
+        COMPLETED
+    }
+}
+
+'REPOSITORY layer'
+
+package "repository" {
+    interface PaymentRepository <<repository>>
+
+    class PaymentRepositoryImpl <<repository>>
 }
 
 'SERVICE layer'
@@ -81,7 +97,7 @@ package "controller" {
     }
 }
 
-'GATEWAY layer'
+'INFRASTRUCTURE layer'
 
 package "infrastructure" {
     interface CreditCardGateway <<infrastructure>>
@@ -94,22 +110,21 @@ class AutoCloseable {
     + close(): void
 }
 
-class Auxiliar2
-hide Auxiliar2
-
 '-------------- FOR POSITIONING ELEMENTS ---------------'
 
-InputView -down- Auxiliar
-Auxiliar -down- OutputView
+InputView -[hidden]down- Auxiliar
+Auxiliar -[hidden]down- OutputView
 
-PaymentController -left- Auxiliar
+PaymentController -[hidden]left- Auxiliar
 
-Auxiliar2 -down- PaymentRequestDto
-Auxiliar2 -down- PaymentRequestDto
+PaymentStatus -[hidden]down- PaymentRequestDto
+PaymentStatus -[hidden]down- PaymentRequestDto
 
-PaymentController -up- Auxiliar2
+PaymentController -[hidden]up- PaymentStatus
 
-Auxiliar2 -right- Payment
+PaymentStatus -[hidden]right- Payment
+
+Payment -[hidden]right- PaymentRepository
 
 '------------------- RELATIONSHIPS --------------------'
 
@@ -145,6 +160,14 @@ PaymentController .right.> PaymentResponseDto : "uses"
 
 PaymentServiceImpl .up.> Payment : "manages"
 
+'Repository'
+
+PaymentRepository <|.right. PaymentRepositoryImpl
+
+'Service and Repository'
+
+PaymentServiceImpl .up.> PaymentRepository : "uses"
+
 'Infrastructure'
 
 CreditCardGateway <|.up. FakeCardGateway
@@ -152,5 +175,4 @@ CreditCardGateway <|.up. FakeCardGateway
 'Service and Infrastructure'
 
 CreditCardMethod .right.> CreditCardGateway : "communicates with"
-
 @enduml
