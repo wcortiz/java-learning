@@ -1,4 +1,4 @@
-package dev.wcortiz.paymentsytem.service;
+package dev.wcortiz.paymentsystem.service;
 
 public final class PaymentRequestDto {
     

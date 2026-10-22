@@ -1,4 +1,4 @@
-package dev.wcortiz.paymentsytem.model;
+package dev.wcortiz.paymentsystem.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

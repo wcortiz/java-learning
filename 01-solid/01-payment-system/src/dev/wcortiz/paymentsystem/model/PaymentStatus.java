@@ -1,4 +1,4 @@
-package dev.wcortiz.paymentsytem.model;
+package dev.wcortiz.paymentsystem.model;
 
 /**
  * Represents the possible states that a payment can have during its lifecycle.
